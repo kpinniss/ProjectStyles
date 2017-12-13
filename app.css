@@ -2,3 +2,17 @@ body{
     margin: 0;
     padding: 0;
 }
+li{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+ul{
+    padding:0;
+    margin: 0;
+}
+
+.my-bdy{
+    height: 400px;
+   
+}

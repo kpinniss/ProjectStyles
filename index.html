@@ -18,21 +18,63 @@
     
     <div class="container" style="margin-top:5%;">
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10">
-                <ul>
-                    <li style="list-style:none; margin-bottom:1%;" ng-repeat="cat in categories">
-                        <button class="btn btn-block" type="button" ng-click="getItems(cat)" >{{cat}}</button>
-                            <div id={{cat}}>
-                                     
-                            </div>
+               <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                <div class="panel-body">
+                     <ul>
+                    <li>
+                        <button  class="btn btn-block"  ng-click="show(showTable,'chains')" >chains</button>
+                        <div ng-repeat="chain in chains">
+                            <button class="btn btn-success btn-block"  ng-if="showTable == true && showCategory == 'chains' " ng-click="addToCart(chain)">{{chain.name}} - {{chain.price}}</button>
+                        </div>
                     </li>
                 </ul>
+                 <ul>
+                    <li>
+                        <button class="btn btn-block"  ng-click="show(showTable,'lockets')" >lockets</button>
+                        <div ng-repeat="locket in lockets">
+                            <button class="btn btn-success btn-block"  ng-if="showTable == true && showCategory == 'lockets' " ng-click="addToCart(locket)">{{locket.name}} - {{locket.price}}</button>
+                        </div>
+                    </li>
+                </ul>
+                 <ul>
+                    <li>
+                        <button class="btn btn-block" ng-click="show(showTable,'charms')" >charms</button>
+                        <div ng-repeat="charm in charms">
+                            <button class="btn btn-success btn-block" ng-if="showTable == true && showCategory == 'charms' " ng-click="addToCart(charm)">{{charm.name}} - {{charm.price}}</button>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+               </div>
             </div>
-            <div class="col-lg-4">
-                
+
+            <!---canvas-->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10">
+                    <div class="panel panel-default">
+                     <div class="panel-heading">Canvas</div>
+                     <div class="panel-body my-bdy">
+                        
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4">
-                
+
+            <!---sub cart-->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10">
+                    <div class="panel panel-default">
+                     <div class="panel-heading">Cart</div>
+                     <div class="panel-body ">
+                        <div ng-repeat="citem in cart.items">
+                            <div>{{citem.name}} - {{citem.price}}</div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <h4>Total:{{cart.total()}}</h4>
+                    </div>
+                </div>
             </div>
+        
+            
     </div>
 
     <script src="app.js"></script>
