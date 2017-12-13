@@ -105,14 +105,12 @@ app.controller("Main", function ($scope, $http) {
         var locketItem = {
             size:item.size
         };
-        var isLower = $scope.cart.items.length >= 1;
-      
            
         if(addItem.category =="chains"){
             $scope.cart.chain.price = addItem.price;
             $scope.cart.chain.name = addItem.name;
         }
-        if(addItem.category =="lockets"){
+        else if(addItem.category =="lockets"){
             $scope.cart.locket.price = addItem.price;
             $scope.cart.locket.name = addItem.name;
         }

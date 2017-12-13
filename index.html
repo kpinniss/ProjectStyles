@@ -54,7 +54,7 @@
                     <div class="panel panel-default">
                      <div class="panel-heading">Canvas</div>
                      <div class="panel-body my-bdy">
-                        
+                            <img class="under" id="mainImage" width="250" src="https://cdn.origamiowl.com/images/products/LK1012/0/LK1012-Large_Silver_Hinged_Living_Locket-V2.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -64,6 +64,8 @@
                     <div class="panel panel-default">
                      <div class="panel-heading">Cart</div>
                      <div class="panel-body ">
+                         <div>{{cart.chain.name}} - {{cart.chain.price}}</div>
+                         <div>{{cart.locket.name}} - {{cart.locket.price}}</div>
                         <div ng-repeat="citem in cart.items">
                             <div>{{citem.name}} - {{citem.price}}</div>
                         </div>
