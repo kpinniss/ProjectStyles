@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
-<body ng-controller="Main">
+<body ng-controller="Main" >
     
     <div class="container" style="margin-top:5%;">
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10">
@@ -50,12 +50,20 @@
             </div>
 
             <!---canvas-->
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10" ng-init="dropCharm()">
                     <div class="panel panel-default">
                      <div class="panel-heading">Canvas</div>
                      <div class="panel-body my-bdy">
-                            <img class="under" id="mainImage" width="250" src="https://cdn.origamiowl.com/images/products/LK1012/0/LK1012-Large_Silver_Hinged_Living_Locket-V2.jpg" alt="">
+                            <!-- <canvas id="myCanvas" width="200" height="200"></canvas> -->
+                            <img style="margin-top:10%; position:absolute;" class="" id="mainImage" width="250" src={{locketDisplay}} alt="">
                     </div>
+                  <div>
+                     <div class="" ng-repeat="charm in cart.items">
+                       <div style="width:55px; margin:0; padding:0; float:left; margin-top:2%;">
+                            <img style="" width="50" src={{charm.img}} alt="">
+                       </div>
+                    </div>
+                  </div>
                 </div>
             </div>
 
@@ -72,9 +80,12 @@
                     </div>
                     <div class="panel-footer">
                         <h4>Total:{{cart.total()}}</h4>
+                        <br>
+                        <button class="btn btn-block">Add to Bag</button>
                     </div>
                 </div>
             </div>
+            
         
             
     </div>

@@ -1,0 +1,515 @@
+@model WbcRepository.Models.HomeLayout
+
+@{
+    ViewBag.Title = Resources.Common.Home;
+}
+
+@section banner
+{
+    @Html.Partial("~/Views/Home/partials/StaticBannerPart.cshtml")
+}
+<style>
+    .HomeSection1 {
+        background: url(../../Content/images/Home/hero1-hand.png) no-repeat;
+        padding: 20px;
+        height: 645px;
+        position: relative;
+        text-align: left;
+        background-position-x: center;
+    }
+
+        .HomeSection1 h1 {
+            font-family: 'Droid Serif';
+            color: #000000;
+            font-weight: 200;
+            font-size: 50px;
+            text-align: left;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f8deda;
+        }
+
+    .HomeSection2 {
+        background: url(/Content/images/Home/wbc_hero-may2017-optimized.jpg) no-repeat;
+        padding: 20px;
+        height: 645px;
+        position: relative;
+        text-align: left;
+        background-position-x: center;
+    }
+
+        .HomeSection2 h1 {
+            font-family: 'Droid Serif';
+            color: #000000;
+            font-weight: 200;
+            font-size: 50px;
+            text-align: left;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f8deda;
+        }
+
+    #CrushClub {
+        background: url('../../Content/images/Home/crush-club-background.png') no-repeat;
+        padding: 20px;
+        height: 441px;
+        position: relative;
+        text-align: left;
+        background-position-x: center;
+    }
+
+    .padding50 {
+        padding: 50px;
+    }
+
+    .btn-white-hero {
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        padding: 15px 20px;
+        font-size: 13px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #000000;
+        font-weight: bold;
+        text-decoration: none;
+        position: absolute;
+        top: 88%;
+        left: 44%;
+        z-index: 4;
+    }
+
+    .btn-pink-hero {
+        background-color: #F7DEDA;
+        border: 1px solid #000000;
+        padding: 15px 20px;
+        font-size: 13px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #000000;
+        font-weight: bold;
+        text-decoration: none;
+        position: absolute;
+        top: 86%;
+        left: 46%;
+        z-index: 4;
+    }
+
+    .h1max {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .h1droid {
+        font-family: 'Droid Serif';
+        color: #000;
+        font-weight: 200;
+        text-align: center;
+        margin-top: -5px;
+    }
+
+    .nodesktop {
+        display: none;
+    }
+
+    #mobilebtn {
+        display: none;
+    }
+
+    .color-pink {
+        color: #e56363;
+    }
+
+    .visible-mobile {
+        display: none !important;
+    }
+
+    .hidden-mobile {
+        display: inline !important;
+    }
+
+    @@media only screen and (max-width:1199px) {
+        .btn-pink-hero {
+            left: 44%;
+            top:80%;
+        }
+    }
+
+    @@media only screen and (max-width:767px) {
+        #Willahome {
+            background-image: none;
+        }
+        .btn-pink-hero{
+            top: 84%;
+        }
+
+        .HomeSection1 {
+            background-image: none;
+        }
+
+        #CrushClub {
+            background-image: none;
+            background-color: #FBF0EE;
+            padding: 0px 20px 20px 20px;
+        }
+
+        .padding50 {
+            padding: 0px;
+        }
+
+        .CrushClub1 {
+            padding-top: 8px;
+        }
+
+        #desktopbtn {
+            display: none;
+        }
+
+        #mobilebtn {
+            display: inline-block;
+            margin-top: 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .nodesktop {
+            display: block;
+            text-align: center;
+        }
+
+        .mobileminus20 {
+            margin-top: 15px;
+        }
+
+        .btn-white-hero {
+            position: relative;
+        }
+
+        .visible-mobile {
+            display: inline !important;
+        }
+
+        .hidden-mobile {
+            display: none !important;
+        }
+
+        #mobileTC {
+            width: 100px;
+            height: 100px;
+        }
+    }
+</style>
+@{ 
+    //convert images 
+    //Hero
+    var Hero = Convert.ToBase64String(Model.HeroImage);
+    var HeroSource = String.Format("data:image/jpg;base64,{0}", Hero);
+    //Hero Mobile
+    var HeroMobile = Convert.ToBase64String(Model.HeroImageMobile);
+    var HeroMobileSrc = String.Format("data:image/jpg;base64,{0}", HeroMobile);
+    //Section One
+    var SecOne = Convert.ToBase64String(Model.SectionOneImage);
+    var SecOneSrc = String.Format("data:image/jpg;base64,{0}", SecOne);
+    //Section Two
+    var SecTwo = Convert.ToBase64String(Model.SectionTwoImage);
+    var SecTwoSrc = String.Format("data:image/jpg;base64,{0}", SecTwo);
+    //Section Three
+    var SecThree = Convert.ToBase64String(Model.SectionThreeImage);
+    var SecThreeSrc = String.Format("data:image/jpg;base64,{0}", SecThree);
+    //Section One
+    var SecFour = Convert.ToBase64String(Model.SectionFourImage);
+    var SecFourSrc = String.Format("data:image/jpg;base64,{0}", SecFour);
+}
+<div id="home-page">
+    <div class="row">
+        <div class="col-md-12" style="margin-top:20px">
+            <a id="desktopbtn" class="btn btn-pink-hero" href="@Model.HeroUrl">SHOP NOW</a>
+            <img id="desktopImg" src="@HeroSource" class="hidden-mobile img-responsive" usemap="#heroImgMap" />
+            <map name="heroImgMap">
+                <area id="mapArea" shape="rect" coords="500,650,800,800" alt="Terms and conditions" href="@Model.TermsAndConditionsLink" target="_blank" />
+            </map>
+            <img id="mobileImg" src="@HeroMobileSrc" class="visible-mobile img-responsive" usemap="#ImgMapMobile" style="min-height:100px; min-width:120px;" />
+            @*<map name="ImgMapMobile">
+                <area id="mapAreaMobile" styel="background-color:red;" shape="rect" coords="188, 333, 560, 388" alt="Terms and conditions" href="@ViewBag.PDF" target="_blank" />
+            </map>*@
+
+        </div>
+    </div>
+    <div class="row" style="margin-top:40px;">
+        <div class="col-md-12">
+            <div class="h1max"></div>
+            <p class="nodesktop"><a id="mobilebtn" class="btn btn-pink" href="@Model.HeroUrl">SHOP NOW</a></p>
+        </div>
+    </div>
+    <div class="space-40"></div>
+    <div class="topic-block">
+        <div class="topic-block-body">
+            <!--banner 1-->
+            <div class="topic-block">
+                <div id="BetterIngredients">
+                    <div class="row">
+                        <div class="aligncenter">
+                            <div class="text-center">
+                                <img src="~/Content/images/Home/DEEP-SEA-HYDROTHERMAL-ENZYMES-lg.jpg" alt="Introducing Our 5 Forces of Nature" class="img-responsive">
+                            </div>
+                            <h1 class="h1bottom h1bottom-35 header-centered" style="padding-top:0;"><i>Introducing Our 5 Forces of Nature</i></h1>
+                            <p class="p-centered montserrat montserrat-normal">Never before have these high-performing antioxidants been brought together with skin plumping <span class="text-blue">hyaluronic acid</span> in our proprietary HY+5 Complex&trade; &mdash; with proven results!</p>
+                            <p class="text-center"><a class="btn btn-pink mobileminus20" href="@Url.Action("HY5Challenge","static")">LEARN MORE</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="topic-block padding50">
+                <div class="row">
+                    <div class="simplify">
+                        <div class="col-sm-6">
+                            <div class="text-center">
+                                <img class="max375img img-responsive" src="@SecOneSrc" alt="Better-For-You Skincare">
+                            </div>
+                            <h1 class="h1bottom header-centered">@Model.SectionOneHeader</h1>
+                            <p class="p-centered max-90 montserrat montserrat-normal">@Model.SectionOneText</p>
+                            <div class="text-center"><a class="btn btn-pink" href="@Model.SectionOneUrl">SHOP NOW</a></div>
+                        </div>
+                        <div class="space-50 visible-xs"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-center">
+                            <!--note: remove style if img sizes match. -->
+                            <img class="max375img img-responsive"  src="@SecTwoSrc" alt="100% Happiness Guarantee">
+                        </div>
+                        <h1 class="h1bottom header-centered">@Model.SectionTwoHeader</h1>
+                        <p class="p-centered max-90 montserrat montserrat-normal">@Model.SectionTwoText</p>
+                        <div class="text-center"><a class="btn btn-pink" href="@Model.SectionTwoUrl">@Model.SectionTwoButtonText</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-20"></div>
+        <!--Banner 2 -->
+        <div class="topic-block">
+            <div class="row">
+                <div id="Willahome" class="Willahome1">
+                    <div class="col-sm-6"><img src="@SecThreeSrc" class="img-responsive" style="vertical-align:middle;"></div>
+                    <div class="col-sm-6 text-center">
+                        <div class="h1top marbottom20"><img src="~/Content/images/Home/willa-img.png" alt="Willa" class="img-responsive"></div>
+                        <h2 style="color: #a87eb2"><b>@Model.SectionThreeHeader &trade;</b></h2>
+                        <p class="p-centered montserrat montserrat-normal montserrat-tight">
+                            Designed to be gentle and effective on young skin, willa is a dedicated skincare line that teens love and parents trust. When you join as a willagirl with a Beauty Advisor, you'll become part of a strong community of young social entrepreneurs whose passion is to share the message that clear, fresh, healthy skin is the best way to &quot;face&quot; the day!
+                        </p>
+                        <div class="h1top">
+                            <a class="btn btn-pink" href="@Model.SectionThreeUrl">@Model.SectionTwoButtonText</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-50"></div>
+        <div class="topic-block">
+            <div class="row">
+                <div id="CrushClub" class="CrushClub1">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6 aligncenter">
+                        <div class="space-60"></div>
+                        <div class="h1top marbottom20 text-center"><img src="~/Content/images/Home/CrushClubLogoSmall.png" class="img-responsive"></div>
+                        <p class="text-center">@Html.Raw(Model.CrushClubText)</p>
+                        <div class="space-30"></div>
+                        <div class="text-center"><a class="btn btn-pink no-margin" href="@Url.Action("register","account")">SIGN ME UP</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script>
+        require(["jquery", "ajax", "cookies", "kendo"], function ($, ajax, cookies, kendo) {
+
+            // Settings
+            var logInAlertCookieName = '@GlobalSettings.Globalization.LogInAlertCookieName',
+                logInAlertExpiration = '@DateTime.Now.AddYears(1).ToShortDateString()';
+
+            // Actions
+            var actions = {
+                filterAlert: function () {
+                    ajax.json({
+                        url: '@Url.Action("FilterAlert", "content")',
+                        success: function (response) {
+                            if (!response.success) {
+                                return;
+                            }
+                            if (response.alertToDisplay != null && cookies.get(logInAlertCookieName + response.alertToDisplay.ContentItemID) == null) {
+                                $("#logInAlertTitleDisplay").html(response.alertToDisplay.ContentDescription);
+                                $('#logInAlertDisplay').html(response.alertToDisplay.Content);
+                                $('#logInAlert').modal('show');
+
+                                var options = {};
+                                options.expires = new Date(logInAlertExpiration);
+                                options.path = "/";
+                                options.domain = false;
+                                options.secure = false;
+
+                                cookies.set(logInAlertCookieName + response.alertToDisplay.ContentItemID, "false", options);
+                            }
+                        },
+                        error: function (xhr, error, status) {
+                            console.log("@Resources.Common.Error: ", xhr, error, status);
+                        }
+                    });
+                }
+            };
+
+
+            // Event Handlers
+            function registerEventHandlers() {
+                // Display log in alert after validation.
+                $(document).ready(function () {
+                    actions.filterAlert();
+                });
+            }
+
+            // Initialization
+            function init() {
+                registerEventHandlers();
+            }
+            init();
+            //terms and conditions imgmapper
+
+            // dec/1 terms and con. imgMapper
+            $(document).ready(function () {
+                var maparea = $('#mapArea');
+                var mobilemap = $('#mapAreaMobile');
+                //
+                var imgheight = $('#desktopImg').height();
+                var mobileheight = $('#mobileImg').height();
+                if(true){
+                    if (imgheight >= 674) {
+                        maparea.attr('coords', '950, 625, 1200, 900');
+                        $('#desktopbtn').css('top', '91%');
+                        $('#desktopbtn').css('left', '47%');
+                    }
+                    if (imgheight <= 556) {
+                        maparea.attr('coords', '800, 520, 950, 725');
+                        $('#desktopbtn').css('left', '45%');
+                    }
+                    if (imgheight <= 426) {
+                        maparea.attr('coords', '600, 400, 800, 650');
+                        $('#desktopbtn').css('left', '44.5%');
+                    }
+                    if (mobileheight <= 556) {
+                        // mobileMap.attr('coords', '300,300,600,650');
+                        $('#mobileImg').wrap($('<a>', {
+                            href: "@Model.TermsAndConditionsLink",
+                            target: "_blank"
+                        }));
+                    }
+                }
+
+            });
+
+            $(window).resize(function () {
+                var maparea = $('#mapArea');
+                var mobilemap = $('#mapAreaMobile');
+                //
+                var imgheight = $('#desktopImg').height();
+                var mobileheight = $('#mobileImg').height();
+                if (false) {
+                    if (imgheight >= 674) {
+                        maparea.attr('coords', '950, 625, 1200, 900');
+                        $('#desktopbtn').css('top', '91%');
+                        $('#desktopbtn').css('left', '47%');
+                    }
+                    if (imgheight <= 556) {
+                        maparea.attr('coords', '800, 520, 950, 725');
+                        $('#desktopbtn').css('left', '45%');
+                    }
+                    if (imgheight <= 426) {
+                        maparea.attr('coords', '600, 400, 800, 650');
+                        $('#desktopbtn').css('left', '44.5%');
+                    }
+                    if (mobileheight <= 556) {
+                        // mobileMap.attr('coords', '300,300,600,650');
+                        $('#mobileImg').wrap($('<a>', {
+                            href: "@Model.TermsAndConditionsLink",
+                            target: "_blank"
+                        }));
+                    }
+
+                }
+
+            });
+
+            //http://faq.willingbeauty.com/wp-content/uploads/2017/09/WBC-General-Promotion-Legal-TCs-FINAL.pdf
+
+        // original
+        $(document).ready(function () {
+            if (false) {
+                var mapArea = $('#mapArea');
+                var mobileMap = $('#mapAreaMobile');
+                //
+                var imgHeight = $('#desktopImg').height();
+                var mobileHeight = $('#mobileImg').height();
+
+                if (imgHeight == 674) {
+                    mapArea.attr('coords', '500, 650, 800, 800');
+                }
+                if (imgHeight == 556) {
+                    mapArea.attr('coords', '425, 535, 650, 800');
+                }
+                if (imgHeight == 426) {
+                    mapArea.attr('coords', '315,409,470,650');
+                }
+                if (mobileHeight <= 556) {
+                    if (mobileHeight <= 556) {
+                        // mobileMap.attr('coords', '300,300,600,650');
+                        $('#mobileImg').wrap($('<a>', {
+                            href: "@Model.TermsAndConditionsLink",
+                            target: "_blank",
+                            height: 1
+                        }));
+                        $('a#mobileImg').height(50);
+                    }
+                }
+
+            }
+        });
+
+        $(window).resize(function () {
+            var mapArea = $('#mapArea');
+            var mobileMap = $('#mapAreaMobile');
+            //
+            var imgHeight = $('#desktopImg').height();
+            var mobileHeight = $('#mobileImg').height();
+            //
+            if (true) {
+                var mapArea = $('#mapArea');
+                var mobileMap = $('#mapAreaMobile');
+                //
+                var imgHeight = $('#desktopImg').height();
+                var mobileHeight = $('#mobileImg').height();
+
+                if (imgHeight == 674) {
+                    mapArea.attr('coords', '500, 650, 800, 800');
+                }
+                if (imgHeight == 556) {
+                    mapArea.attr('coords', '425, 535, 650, 800');
+                }
+                if (imgHeight == 426) {
+                    mapArea.attr('coords', '315,409,470,650');
+                }
+                //mobile
+                if (mobileHeight <= 556) {
+                    $('#mobileImg').wrap($('<a>', {
+                        href: "@Model.TermsAndConditionsLink",
+                        target: "_blank",
+                        height: 1
+                    }));
+                    $('a#mobileImg').height(50);
+                }
+
+            }
+        });
+        });
+    </script>
+}
