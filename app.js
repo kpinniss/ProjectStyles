@@ -1,64 +1,9 @@
-//animation canvas
-var myGamePiece;
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+var imageObj = new Image(200,200);
 
-function dropCharm() {
-    myGamePiece = new component(10, 10, "red", 80, 75);
-    myGameArea.start();
-}
 
-var myGameArea = {
-    canvas : document.createElement("canvas"),
-    start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);        
-    },
-    stop : function() {
-        clearInterval(this.interval);
-    },    
-    clear : function() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-}
 
-function component(width, height, color, x, y, type) {
-    this.type = type;
-    this.width = width;
-    this.height = height;
-    this.x = x;
-    this.y = y;    
-    this.speedX = 0;
-    this.speedY = 0;    
-    this.gravity = 0.1;
-    this.gravitySpeed = 0;
-    this.bounce = 0.2;
-    this.update = function() {
-        ctx = myGameArea.context;
-        ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-    this.newPos = function() {
-        this.gravitySpeed += this.gravity;
-        this.x += this.speedX;
-        this.y += this.speedY + this.gravitySpeed;
-        this.hitBottom();
-    }
-    this.hitBottom = function() {
-        var rockbottom = myGameArea.canvas.height - 150;
-        if (this.y > rockbottom) {
-            this.y = rockbottom;
-            this.gravitySpeed = -(this.gravitySpeed * this.bounce);
-        }
-    }
-}
-
-function updateGameArea() {
-    myGameArea.clear();
-    myGamePiece.newPos();
-    myGamePiece.update();
-}
 
 var categories =[
     "lockets","charms","chains"
@@ -119,8 +64,13 @@ var vLocket = {
 
 };
 
- 
 
+
+ 
+   ////               /// ////////////////
+  ////              //// ////  
+ ////Angular Module///  ////      //////   
+/////         ///////  ////////////////
 var app = angular.module("Locket-Builder", []);
 app.controller("Main", function ($scope, $http) {
     $scope.categories = categories;
@@ -133,7 +83,8 @@ app.controller("Main", function ($scope, $http) {
     $scope.vLocket = vLocket;
     $scope.locketDisplay = "https://cdn.origamiowl.com/images/products/LK1012/0/LK1012-Large_Silver_Hinged_Living_Locket-V2.jpg";
     
-
+////////////////////////////////
+////get item data
     function getItems(category){
         var itemsToReturn = [];
         for(var i =0; i < items.length; i++){
@@ -143,7 +94,8 @@ app.controller("Main", function ($scope, $http) {
         }
          return itemsToReturn;
     }
-    
+/////////////////////////////////    
+//hide show for dynamic selectors
     $scope.show = function(show,category){
         if(show == true){
             $scope.showTable = false;
@@ -154,13 +106,14 @@ app.controller("Main", function ($scope, $http) {
             $scope.showCategory = category
         }
     }
-
+////remove object from arry (charm, locket etc...)
     function remove(array, element) {
         const index = array.indexOf(element);
         array.splice(index, 1);
     }
-//add to cart alot happens here
 
+///////////////////////////////    
+//add to cart alot happens here
     $scope.addToCart = function(item){
         var addItem = {
             name: item.name,
@@ -180,101 +133,24 @@ app.controller("Main", function ($scope, $http) {
             $scope.cart.locket.price = addItem.price;
             $scope.cart.locket.name = addItem.name;
             $scope.locketDisplay = addItem.img;
+            imageObj.onload = function() {
+                context.drawImage(imageObj, 0, 0, 400, 400);
+              };
+              imageObj.src = addItem.img;
         }
         else{
             if(!$scope.vLocket.checkCapacity()){
                 $scope.vLocket.charms.push(locketItem);
                 $scope.cart.items.push(addItem);
                 $scope.vLocket.actual();
-                drop()
+                drop();
             }
             else{
                 alert("Locket is full.");
             }
         }
-        
-        /////
-        
     }
 
-    //animations / canvas
-    $scope.dropCharm = function(){
-        myGamePiece = new component(10, 10, "red", 80, 75);
-        myGameArea.start();
-    }
-
-    $scope.myGameArea = {
-        canvas : document.createElement("canvas"),
-        start : function() {
-            this.canvas.width = 200;
-            this.canvas.height = 400;
-            this.context = this.canvas.getContext("2d");
-            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-            this.interval = setInterval(updateGameArea, 20);        
-        },
-        stop : function() {
-            clearInterval(this.interval);
-        },    
-        clear : function() {
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        }
-    }
-
-    function component(width, height, color, x, y, type) {
-        this.type = type;
-        this.width = width;
-        this.height = height;
-        this.x = x;
-        this.y = y;    
-        this.speedX = 0;
-        this.speedY = 0;    
-        this.gravity = 0.1;
-        this.gravitySpeed = 0;
-        this.bounce = 0.2;
-        this.update = function() {
-            ctx = myGameArea.context;
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-        }
-        this.newPos = function() {
-            this.gravitySpeed += this.gravity;
-            this.x += this.speedX;
-            this.y += this.speedY + this.gravitySpeed;
-            this.hitBottom();
-        }
-        this.hitBottom = function() {
-            var rockbottom = myGameArea.canvas.height - 150;
-            if (this.y > rockbottom) {
-                this.y = rockbottom;
-                this.gravitySpeed = -(this.gravitySpeed * this.bounce);
-            }
-        }
-    }
-
-    function drop(){
-        var comp = new component(10, 10, "blue", 100, 125)
-    }
-
-    function updateGameArea() {
-        myGameArea.clear();
-        myGamePiece.newPos();
-        myGamePiece.update();
-    }
-
-    // function createTable(items, category){
-    //     if($('#'+category+' tr').length > 0){
-    //         $('#'+category).empty();
-    //     }
-    //     else{
-    //         var content = "<table>"
-    //         for(var i=0; i<items.length; i++){
-    //             content += '<tr><td>'+  items[i].name + '</td></tr>';
-    //         }
-    //         content += "</table>"
-    //         $('#'+category).append(content);
-    //     }
-        
-    // } 
-
+    ///Canvas animations///
 });
 
